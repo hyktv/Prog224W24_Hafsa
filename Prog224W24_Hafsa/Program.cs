@@ -11,6 +11,14 @@
             string inventoryFilePath = "inventory.json";
 
             Inventory inventory = new Inventory();
+            // Preload products into the inventory
+            inventory.AddProduct(new Merchandise { Name = "Comb", Price = 10 });
+            inventory.AddProduct(new Beverage { Name = "Arizona Ice Tea", Price = 1 });
+            inventory.AddProduct(new Food { Name = "Hamburger", Price = 6 });
+            inventory.AddProduct(new Merchandise { Name = "Necklace", Price = 45 });
+            inventory.AddProduct(new Food { Name = "Salt and Vinegar Chips", Price = 3 });
+            inventory.AddProduct(new Food { Name = "Goldfish", Price = 3 });
+            inventory.AddProduct(new Merchandise { Name = "Water Bottle", Price = 12 });
 
             // Load inventory data from JSON file
             inventory.LoadFromJson(inventoryFilePath);
@@ -58,6 +66,7 @@
         {
             Console.WriteLine("Enter product details:");
             Console.Write("Name: ");
+
             string name = Console.ReadLine();
 
             double price;
@@ -86,6 +95,12 @@
             Order order = new Order();
             Console.WriteLine("Select a product to add to the order:");
             inventory.DisplayProducts();
+
+            // Display products with correct numbering starting from 1
+            for (int i = 0; i < inventory.Products.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {inventory.Products[i]}");
+            }
 
             bool continueAddingProducts = true;
             while (continueAddingProducts)
